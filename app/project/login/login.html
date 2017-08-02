@@ -1,0 +1,52 @@
+{extends file=$conf->root_path|cat:"/templates/main.html"}
+
+
+
+{block name=content}
+
+<script src="https://cdn.jsdelivr.net/scrollreveal.js/3.1.4/scrollreveal.min.js"></script>
+
+
+	<br/> <br/>
+		 	<link rel="stylesheet" href="{$conf->app_url}/css/login.css" />
+			<script src="{$conf->app_url}/lib/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+	<center>
+	<form    class="form-container"  action="{$conf->action_root}login" method="post" >
+<div class="form-title"><h2>Login</h2></div>
+<div class="form-title">Name</div>
+<input class="form-field" type="text" name="name" /><br />
+<div class="form-title">Pass:</div>
+<input class="form-field" type="password" name="pas" /><br />
+<div class="submit-container">
+<input class="submit-button" type="submit" value="Submit"    />
+</div>
+</form>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+<div ><h2></h2></div>
+<script>
+    window.sr = ScrollReveal();
+
+    sr.reveal('h2, p', {
+        reset: true,
+        delay: 300
+    });
+</script>
+		</center>
+<br/>
+{* wyświeltenie listy błędów, jeśli istnieją *}
+{if $msgs->isError()}
+	<h4 >Wystąpiły błędy: </h4>
+	<ol class="err" >
+	{foreach $msgs->getErrors() as $err}
+	{strip}
+		<li>{$err}</li>
+	{/strip}
+	{/foreach}
+	</ol>
+{/if}
+</tbody>
+</table>
+
+	{/block}

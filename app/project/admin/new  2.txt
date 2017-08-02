@@ -1,0 +1,10 @@
+
+
+<select id="_result" >
+<option value="">... wyszukaj i wybierz placówkę</option>
+</select>
+
+
+...
+
+<input type="button" value="pobierz listę placówek" onclick="ajaxSend('akcja','woj=aaa&miasto=bbb&idpl=ccc','_result')">

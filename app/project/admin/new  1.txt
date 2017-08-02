@@ -1,0 +1,39 @@
+//returns appropriate request object
+function getRequestObject() {
+	if (window.XMLHttpRequest) {
+		return(new XMLHttpRequest()); //contemporary browsers
+	} else if (window.ActiveXObject) {
+		return(new ActiveXObject("Microsoft.XMLHTTP")); //IE 5.5 and 6
+	} else {
+		return(null); //fails for "dinosaurs"
+	}
+}
+
+//inserts response text of request to element defined by destination_id
+function insertResponseText(request, destination_id) {
+	if ((request.readyState == 4) && (request.status == 200)) { //4 => response is complete, 200 => ok
+		document.getElementById(destination_id).innerHTML = request.responseText;
+	}
+}
+
+
+
+
+
+
+
+//inserts response text from address to element defined by destination_id
+function ajaxSend(address, params, destination_id) {
+	var request = getRequestObject();
+	request.onreadystatechange = function() { //add "listener"
+			insertResponseText(request, destination_id);
+		};
+	request.open("POST", address, true);
+	//Send the proper header information along with the request
+	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	request.setRequestHeader("Content-length", params.length);
+	request.setRequestHeader("Connection", "close");
+	//send
+	request.send(params);
+}
+

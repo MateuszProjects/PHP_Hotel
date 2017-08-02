@@ -1,0 +1,41 @@
+{extends file=$conf->root_path|cat:"/templates/main.html"}
+
+
+
+{block name=content}
+	<script src="https://cdn.jsdelivr.net/scrollreveal.js/3.1.4/scrollreveal.min.js"></script>
+		<br/> <br/>
+		 	<link rel="stylesheet" href="{$conf->app_url}/css/login.css" />
+				<script src="{$conf->app_url}/lib/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+	<center>
+	<form class="form-container"  action="{$conf->action_root}register_addUser" method="post" >
+<div class="form-title"><h2>Sign up</h2></div>
+<div class="form-title">Name</div>
+<input class="form-field" type="text" name="name" /><br />
+<div class="form-title">surname</div>
+<input class="form-field" type="text" name="sur" /><br />
+<div class="form-title">login</div>
+<input class="form-field" type="text" name="login" /><br />
+<div class="form-title">pass</div>
+<input class="form-field" type="password" name="pass" /><br />
+<div class="form-title">phone nuber</div>
+<input class="form-field" type="text" name="phone" /><br />
+<div class="submit-container">
+<input class="submit-button" type="submit" value="Submit" />
+</div>
+<br/>
+</form>
+			<script>
+    window.sr = ScrollReveal();
+
+    sr.reveal('h2, p', {
+        reset: true,
+        delay: 300
+    });
+</script>
+		</center>
+						
+<br/>
+	
+	
+	{/block}

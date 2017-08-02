@@ -1,0 +1,135 @@
+
+{extends file=$conf->root_path|cat:"/templates/index.html"}
+
+
+
+
+
+{block name=content}
+
+
+       <link rel="stylesheet" href="{$conf->app_url}/templates/layouts/email.css">
+
+<div id="layout" class="content pure-g">
+    <div id="nav" class="pure-u">
+        <a href="#" class="nav-menu-button">Menu</a>
+
+        <div class="nav-inner">
+            <div class="pure-menu">
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item"><a href="{$conf->action_root}log_out" class="pure-menu-link"><span class="email-label-personal"></span>LogOut</a></li>
+                    <li class="pure-menu-item"><a href="{$conf->action_root}user_list" class="pure-menu-link"><span class="email-label-personal"></span>User List</a></li>
+                    <li class="pure-menu-item"><a href="{$conf->action_root}account" class="pure-menu-link"><span class="email-label-work"></span>Account</a></li>
+                    <li class="pure-menu-item"><a href="{$conf->action_root}list_reservation" class="pure-menu-link"><span class="email-label-travel"></span>List Reservat</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="main" class="pure-u-1">
+        <div class="email-content">
+            <div class="email-content-header pure-g">
+                <div class="pure-u-1-2">
+                    <h1 class="email-content-title">Panel Administratora<br/> Lista urzytkowników:</h1>
+                </div>
+
+            </div>
+
+            <div class="email-content-body">
+               <p>Informacja o urzytkownikach systemu informatycznego hotelu mccenzie - hotel   lista wszytkich urzytkowników wraz z możliwością edycji oraz usuwania urzytkowników </p>
+     
+<script>
+
+
+function ajaxSend(address, params, destination_id) {
+	var request = getRequestObject();
+	request.onreadystatechange = function() { //add "listener"
+			insertResponseText(request, destination_id);
+		};
+	request.open("POST", address, true);
+	//Send the proper header information along with the request
+	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	request.setRequestHeader("Content-length", params.length);
+	request.setRequestHeader("Connection", "close");
+	//send
+	request.send(params);
+}
+</script>
+
+ 
+<!-- our form -->  
+<form id='userForm'  action="" method="post"   >
+    <div><input type='text' name='sf_name' placeholder='Surname' /></div>
+    <div><input type='submit' value='Submit'  onclick="ajaxSend('{$conf->action_root}user_list',   'sf_name',  'foo')"/></div>
+</form>
+ <br/>
+<!-- where the response will be displayed
+<div id='response'></div>
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+<script language="javascript" type="text/javascript">
+$(document).ready(function(){
+    $('#userForm').submit(function(){
+     
+        $.ajax({
+            type: 'POST',
+            url: '{$conf->action_root}user_list', 
+            data: $(this).serialize(),
+			success: function(data){
+				$('#foo').html(data);
+			}
+			
+        })
+        
+
+        return false;
+ 
+    });
+});
+</script>
+
+ -->
+
+
+				
+				
+<table  id="foo" border="1"  class="pure-table">
+<thead>
+	<tr>
+		<th> name </th>
+		<th> surname </th>
+		<th> login </th>
+		<th> pass </th>
+		<th> phone_number </th>
+		<th> admin </th>
+	</tr>
+</thead>
+<tbody>
+{foreach $user as $p}
+{strip}
+	<tr>
+		<td>{$p["name"]}</td>
+		<td>{$p["surname"]}</td>
+		<td>{$p["login"]}</td>
+		<td>{$p["pass"]}</td>
+		<td>{$p["phone_number"]}</td>
+		<td>{$p["admin"]}</td>
+				<td>
+			<a  class="pure-button pure-button-primary" href="{$conf->action_url}editUser&id={$p['iduser']}">Edytuj</a>
+		</td>
+						
+						<td>
+			<a  class="pure-button pure-button-primary" href="{$conf->action_url}delete&id={$p['iduser']}">Usuń</a>
+		</td>
+	</tr>
+{/strip}
+{/foreach}
+   
+            </div>
+        </div>
+    </div>
+</div>
+
+{/block}

@@ -1,0 +1,53 @@
+{extends file=$conf->root_path|cat:"/templates/index.html"}
+{block name=content}
+
+
+       <link rel="stylesheet" href="{$conf->app_url}/templates/layouts/email.css">
+
+<div id="layout" class="content pure-g">
+    <div id="nav" class="pure-u">
+        <a href="#" class="nav-menu-button">User Reservation page form</a>
+
+        <div class="nav-inner">
+            <div class="pure-menu">
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item"><a href="{$conf->action_root}log_out" class="pure-menu-link"><span class="email-label-personal"></span>LogOut</a></li>
+                    <li class="pure-menu-item"><a href="{$conf->action_root}user_account" class="pure-menu-link"><span class="email-label-work"></span>Account</a></li>
+                    <li class="pure-menu-item"><a href="{$conf->action_root}user_reserwation" class="pure-menu-link"><span class="email-label-travel"></span>List Reservat</a></li>
+					<li class="pure-menu-item"><a href="{$conf->action_root}user_main" class="pure-menu-link"><span class="email-label-travel"></span>Main</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="main" class="pure-u-1">
+        <div class="email-content">
+            <div class="email-content-header pure-g">
+                <div class="pure-u-1-2">
+                    <h1 class="email-content-title">Rezerwacja Pokoju Hotelowego: </h1>
+                </div>
+
+            </div>
+
+            <div class="email-content-body">
+               <p>Informacja o urzytkownikach systemu informatycznego hotelu mccenzie - hotel   lista wszytkich urzytkowników wraz z możliwością edycji oraz usuwania urzytkowników </p>
+				<br/>
+				
+				<form method="post" action="{$conf->action_root}user_reserwation_three">
+				<legend>room class: </legend>
+				<input type="text"  name="room_class" ></input>
+				<legend>data start: </legend>
+				<input type="text"  name="data_start"></input>
+				<legend>data stop: </legend>
+				<input type="text"  name="data_stop"></input>
+				<br/><br/>
+				<input type="submit"  ></input>
+				</form>
+				
+
+				
+    </div>
+</div>
+
+{/block}
